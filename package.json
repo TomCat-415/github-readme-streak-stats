@@ -1,9 +1,10 @@
 {
-  "engines": {
-    "node": "18.x"
-  },
-  "devDependencies": {
-    "@prettier/plugin-php": "^0.18.8",
-    "prettier": "^2.6.2"
+  "name": "github-readme-streak-stats-proxy",
+  "private": true,
+  "type": "module",
+  "engines": { "node": "22.x" },
+  "scripts": {
+    "vercel-build": "echo 'no build step'",
+    "start": "node api/index.js"
   }
 }
