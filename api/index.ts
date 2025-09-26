@@ -1,4 +1,3 @@
-// Vercel serverless function: proxies streak SVG to your domain
 export default async function handler(req: any, res: any) {
   try {
     const qs = req.url.includes("?") ? req.url.split("?")[1] : "";
@@ -6,12 +5,11 @@ export default async function handler(req: any, res: any) {
 
     const r = await fetch(target, {
       headers: { "User-Agent": "Vercel-Streak-Proxy" },
-      next: { revalidate: 3600 }, // enable caching on Vercel edges
+      next: { revalidate: 3600 },
     });
 
     const svg = await r.text();
     res.setHeader("Content-Type", "image/svg+xml; charset=utf-8");
-    // cache 1h at the edge; allow stale while revalidating
     res.setHeader("Cache-Control", "s-maxage=3600, stale-while-revalidate=86400");
     res.status(r.status).send(svg);
   } catch (err: any) {
